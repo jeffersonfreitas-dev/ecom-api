@@ -18,4 +18,20 @@ public class Customer {
         this.email = new Email(email);
         this.createdAt = Instant.now();
     }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Identity getUuid() {
+        return uuid;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 }

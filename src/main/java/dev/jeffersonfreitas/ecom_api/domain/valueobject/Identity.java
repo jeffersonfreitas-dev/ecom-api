@@ -5,22 +5,22 @@ import dev.jeffersonfreitas.ecom_api.domain.exception.InvalidValueObjectExceptio
 import java.util.UUID;
 
 public final class Identity {
-    private final String uuid;
+    private final String value;
 
     public Identity(){
-        this.uuid = UUID.randomUUID().toString();
+        this.value = UUID.randomUUID().toString();
     }
 
     public Identity(String uuid){
         try{
             UUID.fromString(uuid);
-            this.uuid = uuid;
+            this.value = uuid;
         }catch (IllegalArgumentException err){
             throw new InvalidValueObjectException("O código informado é inválido");
         }
     }
 
-    public String getIdentity(){
-        return this.uuid;
+    public String value(){
+        return this.value;
     }
 }

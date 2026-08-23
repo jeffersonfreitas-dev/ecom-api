@@ -11,7 +11,7 @@ public final class Name {
         this.name = name;
     }
 
-    public String getName(){
+    public String value(){
         return this.name;
     }
 
