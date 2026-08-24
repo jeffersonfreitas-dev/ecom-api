@@ -11,7 +11,7 @@ public final class Description {
         this.description = description;
     }
 
-    public String getDescription(){
+    public String value(){
         return this.description;
     }
 

@@ -19,6 +19,13 @@ public class Customer {
         this.createdAt = Instant.now();
     }
 
+    public Customer(Identity identity, Name name, Email email, Instant createdAt){
+        this.uuid = identity;
+        this.name = name;
+        this.email = email;
+        this.createdAt = createdAt;
+    }
+
     public Name getName() {
         return name;
     }

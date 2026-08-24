@@ -31,4 +31,24 @@ public class Product {
     public void deactivated(){
         this.active = false;
     }
+
+    public Identity getUuid() {
+        return uuid;
+    }
+
+    public Description getDescription() {
+        return description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
 }
