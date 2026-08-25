@@ -1,0 +1,6 @@
+CREATE TABLE customers(
+    id VARCHAR(60) PRIMARY KEY,
+    name VARCHAR(60) NOT NULL,
+    email VARCHAR(200) NOT NULL,
+    created_at TIMESTAMP NOT NULL
+);

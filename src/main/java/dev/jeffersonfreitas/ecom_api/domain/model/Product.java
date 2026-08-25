@@ -24,6 +24,15 @@ public class Product {
         activated();
     }
 
+    public Product(Identity identity, Description description, BigDecimal price, boolean active, Instant createdAt, Instant updatedAt){
+        this.uuid = identity;
+        this.description = description;
+        this.price = price;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.active = active;
+    }
+
     public void activated(){
         this.active = true;
     }
@@ -50,5 +59,9 @@ public class Product {
 
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }

@@ -1,0 +1,8 @@
+CREATE TABLE products(
+    id VARCHAR(60) PRIMARY KEY,
+    description VARCHAR(200) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);

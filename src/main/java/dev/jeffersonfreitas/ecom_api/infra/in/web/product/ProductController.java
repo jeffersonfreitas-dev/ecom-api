@@ -19,7 +19,7 @@ public class ProductController {
 
     @PostMapping
     private ResponseEntity<ProductResponse> create(@RequestBody CreateProductRequest request){
-        CreateProductInput input = new CreateProductInput(request.name(), request.description(), request.price());
+        CreateProductInput input = new CreateProductInput(request.description(), request.price());
         ProductOutput output = createProductUseCase.execute(input);
         ProductResponse response = ProductResponse.from(output);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

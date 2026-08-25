@@ -22,22 +22,28 @@ public class ProductJpaEntity {
     @Id
     private String id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     private String description;
 
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(nullable = false)
-    private String status;
+    private boolean active;
 
+    @Column(name = "created_at")
     private Instant createdAt;
 
+    @Column(name = "updated_at")
     private Instant updatedAt;
 
     public static ProductJpaEntity from(Product product) {
         return new ProductJpaEntity(
-            product.getUuid(), product.getDescription(), product.getPrice(), product.s
+                product.getUuid().value(),
+                product.getDescription().value(),
+                product.getPrice(),
+                product.isActive(),
+                product.getCreatedAt(),
+                product.getUpdatedAt()
         );
     }
 }

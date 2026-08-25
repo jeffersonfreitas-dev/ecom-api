@@ -27,7 +27,7 @@ public class CustomerJpaEntity {
     @Column(nullable = false, length = 200)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "created_at")
     private Instant createdAt;
 
     public static CustomerJpaEntity from(Customer customer) {
