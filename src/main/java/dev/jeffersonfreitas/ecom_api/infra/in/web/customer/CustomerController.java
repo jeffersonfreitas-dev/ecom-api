@@ -1,23 +1,23 @@
 package dev.jeffersonfreitas.ecom_api.infra.in.web.customer;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CreateCustomerInput;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CreateCustomerUseCase;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.create.CreateCustomerInput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.create.CreateCustomerUseCase;
 import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CustomerOutput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.get.GetCustomerUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
 
     private final CreateCustomerUseCase createCustomerUseCase;
+    private final GetCustomerUseCase getCustomerUseCase;
 
-    public CustomerController(CreateCustomerUseCase createCustomerUseCase) {
+    public CustomerController(CreateCustomerUseCase createCustomerUseCase, GetCustomerUseCase getCustomerUseCase) {
         this.createCustomerUseCase = createCustomerUseCase;
+        this.getCustomerUseCase = getCustomerUseCase;
     }
 
     @PostMapping
@@ -26,5 +26,12 @@ public class CustomerController {
         CustomerOutput output = createCustomerUseCase.execute(input);
         CustomerResponse response = CustomerResponse.from(output);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<CustomerResponse> get(@PathVariable String id){
+        CustomerOutput output = getCustomerUseCase.execute(id);
+        CustomerResponse response = CustomerResponse.from(output);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

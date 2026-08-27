@@ -1,7 +1,7 @@
 package dev.jeffersonfreitas.ecom_api.application.service.customer;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CreateCustomerInput;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CreateCustomerUseCase;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.create.CreateCustomerInput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.create.CreateCustomerUseCase;
 import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CustomerOutput;
 import dev.jeffersonfreitas.ecom_api.application.port.out.customer.CustomerRepository;
 import dev.jeffersonfreitas.ecom_api.domain.exception.CustomerAlreadyExistsException;

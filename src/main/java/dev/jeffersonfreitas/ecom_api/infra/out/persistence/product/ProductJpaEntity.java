@@ -1,6 +1,5 @@
 package dev.jeffersonfreitas.ecom_api.infra.out.persistence.product;
 
-import dev.jeffersonfreitas.ecom_api.domain.model.Product;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -35,15 +34,4 @@ public class ProductJpaEntity {
 
     @Column(name = "updated_at")
     private Instant updatedAt;
-
-    public static ProductJpaEntity from(Product product) {
-        return new ProductJpaEntity(
-                product.getUuid().value(),
-                product.getDescription().value(),
-                product.getPrice(),
-                product.isActive(),
-                product.getCreatedAt(),
-                product.getUpdatedAt()
-        );
-    }
 }

@@ -17,7 +17,7 @@ public class CreateProductService implements CreateProductUseCase {
 
     @Override
     public ProductOutput execute(CreateProductInput input) {
-        if(productRepository.existsByName(input.description())){
+        if(productRepository.existsByDescription(input.description())){
             throw new ProductAlreadyExistsException("Já existe um produto cadastrado com esta descrição");
         }
         Product product = new Product(input.description(), input.price());

@@ -29,13 +29,4 @@ public class CustomerJpaEntity {
 
     @Column(nullable = false, name = "created_at")
     private Instant createdAt;
-
-    public static CustomerJpaEntity from(Customer customer) {
-        return new CustomerJpaEntity(
-                customer.getUuid().value(),
-                customer.getName().value(),
-                customer.getEmail().value(),
-                customer.getCreatedAt()
-        );
-    }
 }
