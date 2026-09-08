@@ -1,6 +1,6 @@
 package dev.jeffersonfreitas.ecom_api.infra.in.web.customer;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CustomerOutput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CustomerOutput;
 
 public record CustomerResponse(String id, String name, String email) {
 

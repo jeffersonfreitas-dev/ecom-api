@@ -1,6 +1,6 @@
 package dev.jeffersonfreitas.ecom_api.application.service.customer;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CustomerOutput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CustomerOutput;
 import dev.jeffersonfreitas.ecom_api.application.port.in.customer.GetCustomerUseCase;
 import dev.jeffersonfreitas.ecom_api.application.port.out.customer.CustomerRepository;
 import dev.jeffersonfreitas.ecom_api.application.exception.CustomerNotFoundException;

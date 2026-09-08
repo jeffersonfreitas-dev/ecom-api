@@ -1,4 +1,4 @@
-package dev.jeffersonfreitas.ecom_api.application.port.in.customer;
+package dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto;
 
 import dev.jeffersonfreitas.ecom_api.domain.model.Customer;
 

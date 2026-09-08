@@ -1,12 +1,8 @@
 package dev.jeffersonfreitas.ecom_api.infra.in.web.customer;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.GetCustomerUseCase;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.create.CreateCustomerUseCase;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.getAll.GetAllCustomerUseCase;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.*;
 import dev.jeffersonfreitas.ecom_api.application.port.out.customer.CustomerRepository;
-import dev.jeffersonfreitas.ecom_api.application.service.customer.CreateCustomerService;
-import dev.jeffersonfreitas.ecom_api.application.service.customer.GetAllCustomerService;
-import dev.jeffersonfreitas.ecom_api.application.service.customer.GetCustomerService;
+import dev.jeffersonfreitas.ecom_api.application.service.customer.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,4 +24,13 @@ public class CustomerConfig {
         return new GetAllCustomerService(customerRepository);
     }
 
+    @Bean
+    DeleteCustomerUseCase deleteCustomerUseCase(CustomerRepository customerRepository) {
+        return new DeleteCustomerService(customerRepository);
+    }
+
+    @Bean
+    UpdateCustomerUseCase updateCustomerUseCase(CustomerRepository customerRepository){
+        return new UpdateCustomerService(customerRepository);
+    }
 }

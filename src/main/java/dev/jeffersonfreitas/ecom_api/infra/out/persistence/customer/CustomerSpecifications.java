@@ -1,6 +1,6 @@
 package dev.jeffersonfreitas.ecom_api.infra.out.persistence.customer;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.getAll.CustomerFilter;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CustomerFilter;
 import org.springframework.data.jpa.domain.Specification;
 
 public final class CustomerSpecifications {

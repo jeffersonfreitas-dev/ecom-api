@@ -1,14 +1,11 @@
 package dev.jeffersonfreitas.ecom_api.infra.in.web.customer;
 
+import dev.jeffersonfreitas.ecom_api.application.dto.PageGeneric;
 import dev.jeffersonfreitas.ecom_api.application.dto.PageableRequestInput;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CustomerOutput;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.CustomerPage;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.GetCustomerUseCase;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.create.CreateCustomerInput;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.create.CreateCustomerUseCase;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.getAll.CustomerFilter;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.getAll.GetAllCustomerUseCase;
 import dev.jeffersonfreitas.ecom_api.application.dto.SortOrder;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.*;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.*;
+import dev.jeffersonfreitas.ecom_api.domain.model.Customer;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -23,12 +20,17 @@ public class CustomerController {
     private final CreateCustomerUseCase createCustomerUseCase;
     private final GetCustomerUseCase getCustomerUseCase;
     private final GetAllCustomerUseCase getAllCustomerUseCase;
+    private final DeleteCustomerUseCase deleteCustomerUseCase;
+    private final UpdateCustomerUseCase updateCustomerUseCase;
 
     public CustomerController(CreateCustomerUseCase createCustomerUseCase, GetCustomerUseCase getCustomerUseCase,
-                              GetAllCustomerUseCase getAllCustomerUseCase) {
+                              GetAllCustomerUseCase getAllCustomerUseCase, DeleteCustomerUseCase deleteCustomerUseCase,
+                              UpdateCustomerUseCase updateCustomerUseCase) {
         this.createCustomerUseCase = createCustomerUseCase;
         this.getCustomerUseCase = getCustomerUseCase;
         this.getAllCustomerUseCase = getAllCustomerUseCase;
+        this.deleteCustomerUseCase = deleteCustomerUseCase;
+        this.updateCustomerUseCase = updateCustomerUseCase;
     }
 
     @PostMapping
@@ -39,6 +41,14 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<CustomerResponse> update(@PathVariable String id, @RequestBody UpdateCustomerRequest request){
+        UpdateCustomerInput input = new UpdateCustomerInput(request.name(), request.email());
+        CustomerOutput output = updateCustomerUseCase.execute(id, input);
+        CustomerResponse response = CustomerResponse.from(output);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<CustomerResponse> get(@PathVariable String id){
         CustomerOutput output = getCustomerUseCase.execute(id);
@@ -47,7 +57,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<CustomerPage> findAll(
+    public ResponseEntity<PageGeneric<CustomerOutput>> findAll(
             @PageableDefault(size = 20, sort = "name", direction = Sort.Direction.ASC) Pageable pageable, CustomerFilter filter){
 
         PageableRequestInput pageableInput = new PageableRequestInput(
@@ -58,7 +68,13 @@ public class CustomerController {
                                 order.getProperty(),
                                 order.getDirection().name())).toList()
         );
-        CustomerPage customerPage = getAllCustomerUseCase.execute(filter, pageableInput);
+        PageGeneric<CustomerOutput> customerPage = getAllCustomerUseCase.execute(filter, pageableInput);
         return ResponseEntity.status(HttpStatus.OK).body(customerPage);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id){
+        deleteCustomerUseCase.execute(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
