@@ -1,6 +1,6 @@
 package dev.jeffersonfreitas.ecom_api.infra.in.web.product;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.product.ProductOutput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.product.dto.ProductOutput;
 
 import java.math.BigDecimal;
 import java.time.Instant;

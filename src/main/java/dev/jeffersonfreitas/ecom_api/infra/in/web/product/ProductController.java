@@ -1,8 +1,8 @@
 package dev.jeffersonfreitas.ecom_api.infra.in.web.product;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.product.CreateProductInput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.product.dto.CreateProductInput;
 import dev.jeffersonfreitas.ecom_api.application.port.in.product.CreateProductUseCase;
-import dev.jeffersonfreitas.ecom_api.application.port.in.product.ProductOutput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.product.dto.ProductOutput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

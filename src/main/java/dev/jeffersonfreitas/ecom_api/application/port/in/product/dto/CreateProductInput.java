@@ -1,4 +1,4 @@
-package dev.jeffersonfreitas.ecom_api.application.port.in.product;
+package dev.jeffersonfreitas.ecom_api.application.port.in.product.dto;
 
 import java.math.BigDecimal;
 

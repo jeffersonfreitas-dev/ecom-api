@@ -22,13 +22,6 @@ public class GetAllCustomerService implements GetAllCustomerUseCase {
     @Override
     public PageGeneric<CustomerOutput> execute(CustomerFilter filter, PageableRequestInput pageableInput) {
         PageGeneric<Customer> customerPageGeneric = customerRepository.findAll(filter, pageableInput);
-        List<CustomerOutput> outputList = customerPageGeneric.elements().stream().map(CustomerOutput::from).toList();
-        return new PageGeneric<>(
-                outputList,
-                customerPageGeneric.number(),
-                customerPageGeneric.size(),
-                customerPageGeneric.totalElements(),
-                customerPageGeneric.totalPages()
-        );
+        return customerPageGeneric.map(CustomerOutput::from);
     }
 }

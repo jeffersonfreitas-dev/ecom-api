@@ -1,8 +1,8 @@
 package dev.jeffersonfreitas.ecom_api.application.service.product;
 
-import dev.jeffersonfreitas.ecom_api.application.port.in.product.CreateProductInput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.product.dto.CreateProductInput;
 import dev.jeffersonfreitas.ecom_api.application.port.in.product.CreateProductUseCase;
-import dev.jeffersonfreitas.ecom_api.application.port.in.product.ProductOutput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.product.dto.ProductOutput;
 import dev.jeffersonfreitas.ecom_api.application.port.out.product.ProductRepository;
 import dev.jeffersonfreitas.ecom_api.domain.exception.ProductAlreadyExistsException;
 import dev.jeffersonfreitas.ecom_api.domain.model.Product;
