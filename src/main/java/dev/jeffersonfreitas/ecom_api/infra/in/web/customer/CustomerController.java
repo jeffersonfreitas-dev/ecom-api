@@ -1,17 +1,21 @@
 package dev.jeffersonfreitas.ecom_api.infra.in.web.customer;
 
 import dev.jeffersonfreitas.ecom_api.application.dto.PageGeneric;
-import dev.jeffersonfreitas.ecom_api.application.dto.PageableRequestInput;
+import dev.jeffersonfreitas.ecom_api.application.dto.PageableRequest;
 import dev.jeffersonfreitas.ecom_api.application.dto.SortOrder;
 import dev.jeffersonfreitas.ecom_api.application.port.in.customer.*;
-import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.*;
-import dev.jeffersonfreitas.ecom_api.domain.model.Customer;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CreateCustomerInput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CustomerFilter;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CustomerOutput;
+import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.UpdateCustomerInput;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
@@ -57,19 +61,14 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<PageGeneric<CustomerOutput>> findAll(
+    public ResponseEntity<PageGeneric<CustomerResponse>> getAll(
             @PageableDefault(size = 20, sort = "name", direction = Sort.Direction.ASC) Pageable pageable, CustomerFilter filter){
 
-        PageableRequestInput pageableInput = new PageableRequestInput(
-                pageable.getPageNumber(),
-                pageable.getPageSize(),
-                pageable.getSort().stream()
-                        .map(order -> new SortOrder(
-                                order.getProperty(),
-                                order.getDirection().name())).toList()
-        );
-        PageGeneric<CustomerOutput> customerPage = getAllCustomerUseCase.execute(filter, pageableInput);
-        return ResponseEntity.status(HttpStatus.OK).body(customerPage);
+        List<SortOrder> sort = pageable.getSort().stream().map(o -> new SortOrder(o.getProperty(), o.getDirection().name())).toList();
+        PageableRequest pageableRequest = PageableRequest.create(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        PageGeneric<CustomerOutput> customerPage = getAllCustomerUseCase.execute(filter, pageableRequest);
+        PageGeneric<CustomerResponse> responsePageGeneric = customerPage.map(CustomerResponse::from);
+        return ResponseEntity.status(HttpStatus.OK).body(responsePageGeneric);
     }
 
     @DeleteMapping("{id}")

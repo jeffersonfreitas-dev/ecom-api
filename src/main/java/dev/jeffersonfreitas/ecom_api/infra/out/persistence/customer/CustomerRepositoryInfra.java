@@ -1,7 +1,7 @@
 package dev.jeffersonfreitas.ecom_api.infra.out.persistence.customer;
 
 import dev.jeffersonfreitas.ecom_api.application.dto.PageGeneric;
-import dev.jeffersonfreitas.ecom_api.application.dto.PageableRequestInput;
+import dev.jeffersonfreitas.ecom_api.application.dto.PageableRequest;
 import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CustomerFilter;
 import dev.jeffersonfreitas.ecom_api.application.port.out.customer.CustomerRepository;
 import dev.jeffersonfreitas.ecom_api.domain.model.Customer;
@@ -41,7 +41,7 @@ public class CustomerRepositoryInfra implements CustomerRepository {
     }
 
     @Override
-    public PageGeneric<Customer> findAll(CustomerFilter filter, PageableRequestInput pageableInput) {
+    public PageGeneric<Customer> findAll(CustomerFilter filter, PageableRequest pageableInput) {
         Pageable pageable = PageRequestMapper.toSpring(pageableInput);
         Specification<CustomerJpaEntity> entitySpecification = CustomerSpecifications.from(filter);
         Page<CustomerJpaEntity> customers = customerJpaRepository.findAll(entitySpecification, pageable);

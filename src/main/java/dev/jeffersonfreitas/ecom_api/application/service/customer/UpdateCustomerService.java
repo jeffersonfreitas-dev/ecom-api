@@ -22,8 +22,7 @@ public class UpdateCustomerService implements UpdateCustomerUseCase {
         Customer customer = customerRepository.getById(id)
                 .orElseThrow(() -> new CustomerNotFoundException("Cliente não encontrado para realizar a atualização"));
         Name name = new Name(input.name());
-        Email email = new Email(input.email());
-        Customer customerUpdated = new Customer(customer.getUuid(), name, email, customer.getCreatedAt());
+        Customer customerUpdated = new Customer(customer.getUuid(), name, customer.getEmail(), customer.getCreatedAt());
         customerRepository.save(customerUpdated);
         return CustomerOutput.from(customerUpdated);
     }

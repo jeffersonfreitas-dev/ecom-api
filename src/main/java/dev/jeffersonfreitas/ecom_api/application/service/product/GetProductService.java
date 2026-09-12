@@ -19,7 +19,8 @@ public class GetProductService implements GetProductUseCase {
         if(id == null || id.isBlank()){
             throw new IllegalArgumentException("O código informado não pode ser nulo ou vazio");
         }
-        Product product = repository.get(id).orElseThrow(() -> new ProductNotFoundException("Não existe produto com o código informado"));
+        Product product = repository.get(id)
+                .orElseThrow(() -> new ProductNotFoundException("Não existe produto com o código informado"));
         return ProductOutput.from(product);
     }
 }

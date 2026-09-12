@@ -18,7 +18,8 @@ public class DeleteProductService implements DeleteProductUseCase {
         if (id == null || id.isBlank()){
             throw new BusinessException("O código não pode ser nulo ou vazio ao deletar");
         }
-        repository.get(id).orElseThrow(() -> new ProductNotFoundException("Cliente não encontrado para exclusão"));
+        repository.get(id)
+                .orElseThrow(() -> new ProductNotFoundException("Produto não encontrado para exclusão"));
         repository.delete(id);
     }
 }
