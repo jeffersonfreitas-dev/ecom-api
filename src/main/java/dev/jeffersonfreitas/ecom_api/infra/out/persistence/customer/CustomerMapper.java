@@ -1,5 +1,6 @@
 package dev.jeffersonfreitas.ecom_api.infra.out.persistence.customer;
 
+import dev.jeffersonfreitas.ecom_api.application.exception.BusinessException;
 import dev.jeffersonfreitas.ecom_api.domain.model.Customer;
 import dev.jeffersonfreitas.ecom_api.domain.valueobject.Email;
 import dev.jeffersonfreitas.ecom_api.domain.valueobject.Identity;
@@ -11,6 +12,9 @@ public final class CustomerMapper {
 
 
     public static Customer toDomain(CustomerJpaEntity entity) {
+        if(entity == null){
+            throw new BusinessException("Entidade não pode ser nulo ao converter para o dominio");
+        }
         return new Customer(
                 new Identity(entity.getId()),
                 new Name(entity.getName()),
@@ -20,6 +24,9 @@ public final class CustomerMapper {
     }
 
     public static CustomerJpaEntity toEntity(Customer customer) {
+        if(customer == null){
+            throw new BusinessException("Dominio não pode ser nulo ao converter para a entidade");
+        }
        return new CustomerJpaEntity(
             customer.getUuid().value(),
             customer.getName().value(),

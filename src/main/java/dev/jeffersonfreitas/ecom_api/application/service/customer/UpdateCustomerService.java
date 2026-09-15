@@ -6,7 +6,6 @@ import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.CustomerOu
 import dev.jeffersonfreitas.ecom_api.application.port.in.customer.dto.UpdateCustomerInput;
 import dev.jeffersonfreitas.ecom_api.application.port.out.customer.CustomerRepository;
 import dev.jeffersonfreitas.ecom_api.domain.model.Customer;
-import dev.jeffersonfreitas.ecom_api.domain.valueobject.Email;
 import dev.jeffersonfreitas.ecom_api.domain.valueobject.Name;
 
 public class UpdateCustomerService implements UpdateCustomerUseCase {
