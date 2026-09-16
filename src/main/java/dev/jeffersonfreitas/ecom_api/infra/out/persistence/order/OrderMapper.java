@@ -43,7 +43,7 @@ public class OrderMapper {
                         item.productId().value(),
                         item.quantity().value(),
                         item.value(),
-                        item.total()));
+                        item.total())).toList();
     }
 
     private static List<OrderItem> toDomainItem(List<OrderItemJpaEntity> items) {

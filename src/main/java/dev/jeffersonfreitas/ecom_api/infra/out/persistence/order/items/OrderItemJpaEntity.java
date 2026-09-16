@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import dev.jeffersonfreitas.ecom_api.infra.out.persistence.order.OrderJpaEntity;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -18,11 +20,10 @@ public class OrderItemJpaEntity {
     private String id;
 
     @ManyToOne
-    @Column(nullable = false, length = 60)
-    @JoinColumn(name = "orderId")
-    private String orderId;
+    @JoinColumn(name = "order_id")
+    private OrderJpaEntity order;
 
-    @Column(nullable = false, length = 60)
+    @Column(name = "product_id", nullable = false, length = 60)
     private String productId;
 
     @Column(nullable = false)
@@ -36,5 +37,13 @@ public class OrderItemJpaEntity {
 
     public BigDecimal getTotal(){
         return BigDecimal.valueOf(quantity).multiply(total);
+    }
+
+    public OrderItemJpaEntity(String id, String orderId, String productId, double quantity, BigDecimal value, BigDecimal total){
+        this.id = id;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.value = value;
+        this.total = total;
     }
 }

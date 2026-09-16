@@ -20,7 +20,7 @@ public class OrderJpaEntity {
     @Id
     private String id;
 
-    @Column(nullable = false, length = 60)
+    @Column(name = "customer_id", nullable = false, length = 60)
     private String customerId;
 
     @Column(nullable = false)
@@ -32,10 +32,10 @@ public class OrderJpaEntity {
     @Column(nullable = false)
     private BigDecimal total;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String status;
 
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItemJpaEntity> items;
 
 }
