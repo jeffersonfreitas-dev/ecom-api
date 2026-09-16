@@ -2,6 +2,7 @@ package dev.jeffersonfreitas.ecom_api.infra.config;
 
 import dev.jeffersonfreitas.ecom_api.application.exception.BusinessException;
 import dev.jeffersonfreitas.ecom_api.application.exception.CustomerNotFoundException;
+import dev.jeffersonfreitas.ecom_api.application.exception.OrderNotFoundException;
 import dev.jeffersonfreitas.ecom_api.application.exception.ProductNotFoundException;
 import dev.jeffersonfreitas.ecom_api.domain.exception.CustomerAlreadyExistsException;
 import dev.jeffersonfreitas.ecom_api.domain.exception.InvalidValueObjectException;
@@ -28,6 +29,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         problemDetail.setTitle("Produto não encontrado");
         return problemDetail;
     }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ProblemDetail handleOrderNotFoundException(OrderNotFoundException e){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        problemDetail.setTitle("Pedido não encontrado");
+        return problemDetail;
+    }    
 
     @ExceptionHandler(CustomerAlreadyExistsException.class)
     public ProblemDetail handleCustomerAlreadyExistsException(CustomerAlreadyExistsException e){
