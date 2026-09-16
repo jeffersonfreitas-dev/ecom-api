@@ -16,7 +16,6 @@ public class OrderRepositoryInfra implements OrderRepository {
         this.repository = repository;
     }
 
-
     @Override
     public Order save(Order order) {
         OrderJpaEntity entity = OrderMapper.toEntity(order);
@@ -24,9 +23,13 @@ public class OrderRepositoryInfra implements OrderRepository {
         return OrderMapper.toDomain(entity);
     }
 
-
     @Override
     public Optional<Order> get(String id) {
         return repository.findById(id).map(OrderMapper::toDomain);
+    }
+
+    @Override
+    public void delete(String id) {
+        repository.deleteById(id);
     }
 }
